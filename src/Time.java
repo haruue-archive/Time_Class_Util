@@ -100,6 +100,48 @@ public class Time implements ITime {
         day -= (int) (timeStamp / 86400);
     }
 
+    //human --> stamp, year >= 1970
+    private void humanToStamp() {
+        if (year < 1970) {
+            negativeHumanToStamp();
+            return;
+        }
+        long stamp = 0;
+        //sum the seconds before the input year
+        for (int year = 1970; year < this.year; year++) {
+            stamp += secondsOfYear(year);
+        }
+        //sum the seconds in the input year and before the input month
+        for (int month = 1; month < this.month; month++) {
+            stamp += secondsOfMonth(this.year, month);
+        }
+        //sum the seconds in the input month and before the input day
+        stamp += 86400 * (this.day - 1);
+        //sum the seconds in the input day
+        stamp += 3600 * (this.hour);
+        stamp += 60 * (this.minute);
+        stamp += this.second;
+        stamp -= (long) (this.timeZone * 3600);
+        timeStamp = stamp;
+    }
+
+    //human --> stamp, year < 1970
+    private void negativeHumanToStamp() {
+        long stamp = 0;
+        for (int year = 1969; year > this.year; year--) {
+            stamp += secondsOfYear(year);
+        }
+        for (int month = 12; month > this.month; month--) {
+            stamp += secondsOfMonth(this.year, month);
+        }
+        stamp += 86400 * (daysOfMonth(this.year, this.month) - this.day);
+        stamp += (3600 * (23 - hour));
+        stamp += (60 * (59 - minute));
+        stamp += (60 - second);
+        stamp += (long) (this.timeZone * 3600);
+        timeStamp = -stamp;
+    }
+
     @Override
     public void set(long timeStamp) {
         this.timeStamp = timeStamp;
@@ -108,7 +150,13 @@ public class Time implements ITime {
 
     @Override
     public void set(int year, int month, int day, int hour, int minute, int second) {
-
+        this.year = year;
+        this.month = month;
+        this.day = day;
+        this.hour = hour;
+        this.minute = minute;
+        this.second = second;
+        humanToStamp();
     }
 
     @Override
@@ -178,7 +226,11 @@ public class Time implements ITime {
      */
     @Override
     public int getWeek() {
-        return 0;
+        if (month < 3) {
+            month += 12;
+            --year;
+        }
+        return (day + 1 + 2 * month + 3 * (month + 1) / 5 + year + (year >> 2) - year / 100 + year / 400) % 7;
     }
 
     /**
