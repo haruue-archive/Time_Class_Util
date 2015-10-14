@@ -250,7 +250,12 @@ public class Time implements ITime {
      */
     @Override
     public int getDayOfYear() {
-        return 0;
+        int result = 0;
+        for (int month = 1; month < this.month; month++) {
+            result += daysOfMonth(this.year, this.month);
+        }
+        result += this.day;
+        return result;
     }
 
     /**
@@ -299,7 +304,14 @@ public class Time implements ITime {
      */
     @Override
     public String format(String format) {
-        return null;
+        format = format.replaceAll("yyyy", Integer.toString(year));
+        format = format.replaceAll("MM", Integer.toString(month));
+        format = format.replaceAll("dd", Integer.toString(day));
+        format = format.replaceAll("HH", (hour < 10) ? "0" + Integer.toString(hour) : Integer.toString(hour));
+        format = format.replaceAll("hh", (hour % 12 < 10) ? "0" + Integer.toString(hour % 12) : Integer.toString(hour % 12));
+        format = format.replaceAll("mm", (minute < 10) ? "0" + Integer.toString(minute) : Integer.toString(minute));
+        format = format.replaceAll("ss", (second < 10) ? "0" + Integer.toString(second) : Integer.toString(second));
+        return format;
     }
 
     /**
