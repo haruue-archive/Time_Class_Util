@@ -8,7 +8,7 @@
 import com.ant.jobgod.jobgod.util.ITime;
 
 public class Time implements ITime {
-    private int year = 1970, month = 1, day = 1, hour = 0, minute = 0, second = 0;
+    private int year = 1970, month = 1, day = 1, hour = 0, minute = 0, second = 0, timeZone = 8;
     private long timeStamp;
 
     //necessary math function
@@ -42,10 +42,68 @@ public class Time implements ITime {
         return isLeapYear(year) ? 31622400 : 31536000;
     }
 
+    //stamp --> human
+    private void stampToHuman() {
+        //init timeHuman
+        long timeStamp = this.timeStamp + (long) (3600 * timeZone);
+        //when time stamp is negative
+        if (timeStamp < 0) {
+            negativeStampToHuman(timeStamp);
+            return;
+        }
+        //get year
+        while (timeStamp - secondsOfYear(year) >= 0) {
+            timeStamp -= secondsOfYear(year);
+            year++;
+        }
+        //get month
+        while (timeStamp - secondsOfMonth(year, month) >= 0) {
+            timeStamp -= secondsOfMonth(year, month);
+            month++;
+        }
+        //get day
+        day = 1 + (int) ((timeStamp) / 86400);
+        timeStamp %= 86400;
+        //get hour
+        hour = (int) ((timeStamp) / 3600);
+        timeStamp %= 3600;
+        //get minute
+        minute = (int) ((timeStamp) / 60);
+        timeStamp %= 60;
+        //get second
+        second = (int) timeStamp;
+    }
+
+    //negative stamp --> human
+    private void negativeStampToHuman(long timeStamp) {
+        timeStamp = -timeStamp;
+        //get time first
+        second = (int) (((timeStamp % 60) == 0) ? 0 : (60 - (timeStamp % 60)));
+        timeStamp -= timeStamp % 60;
+        minute = (int) (((timeStamp % 3600) == 0) ? ((second != 0) ? 59 : 0) : (((second != 0) ? (59 - (timeStamp % 3600) / 60) : (60 - (timeStamp % 3600) / 60))));
+        timeStamp -= timeStamp % 3600;
+        hour = (int) (((timeStamp % 86400) == 0) ? ((minute != 0) ? 23 : 0) : (((minute != 0) ? (23 - (timeStamp % 86400) / 3600) : (24 - (timeStamp % 86400) / 3600))));
+        timeStamp -= timeStamp % 86400;
+        //get year and month
+        year = 1969;
+        month = 12;
+        while (timeStamp >= secondsOfYear(year)) {
+            timeStamp -= secondsOfYear(year);
+            year--;
+        }
+        while (timeStamp >= secondsOfMonth(year, month)) {
+            timeStamp -= secondsOfMonth(year, month);
+            month--;
+        }
+        //get day
+        day = daysOfMonth(year, month);
+        day -= (int) (timeStamp / 86400);
+    }
 
     @Override
     public void set(long timeStamp) {
-
+        this.timeStamp = timeStamp;
+        stampToHuman();
     }
 
     @Override
@@ -55,7 +113,7 @@ public class Time implements ITime {
 
     @Override
     public void setYear(int year) {
-        this.year=year;
+        this.year = year;
     }
 
     @Override
@@ -65,7 +123,7 @@ public class Time implements ITime {
 
     @Override
     public void setMonth(int month) {
-        this.month=month;
+        this.month = month;
     }
 
     @Override
@@ -75,7 +133,7 @@ public class Time implements ITime {
 
     @Override
     public void setDay(int day) {
-        this.day=day;
+        this.day = day;
     }
 
     @Override
@@ -85,7 +143,7 @@ public class Time implements ITime {
 
     @Override
     public void setHour(int hour) {
-        this.hour=hour;
+        this.hour = hour;
     }
 
     @Override
@@ -95,7 +153,7 @@ public class Time implements ITime {
 
     @Override
     public void setMinute(int minute) {
-        this.minute=minute;
+        this.minute = minute;
     }
 
     @Override
@@ -105,7 +163,7 @@ public class Time implements ITime {
 
     @Override
     public void setSecond(int second) {
-        this.second=second;
+        this.second = second;
     }
 
     @Override
@@ -199,6 +257,18 @@ public class Time implements ITime {
      */
     @Override
     public void setTimeZone(String timeZone) {
-
+        switch (timeZone) {
+            case "GMT":
+            case "UTC":
+                this.timeZone = 0;
+                break;
+            case "CCT":
+                this.timeZone = 8;
+                break;
+            case "JST":
+                this.timeZone = 9;
+                break;
+        }
+        stampToHuman();
     }
 }
