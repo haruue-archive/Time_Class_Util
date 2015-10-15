@@ -8,7 +8,7 @@
 import com.ant.jobgod.jobgod.util.ITime;
 
 public class Time implements ITime {
-    private int year = 1970, month = 1, day = 1, hour = 0, minute = 0, second = 0, timeZone = 8;
+    private int year = 1970, month = 1, day = 1, hour = 0, minute = 0, second = 0, timeZone = 8, microSecond = 0;
     private long timeStamp;
 
     //necessary math function
@@ -292,7 +292,46 @@ public class Time implements ITime {
      */
     @Override
     public void parse(String time, String format) {
-
+        String[] timeArray = time.split("[^0-9]");
+        String thisCase, lastCase = "";
+        int index = 0;
+        for (; timeArray[index].equals(""); index++) ;
+        for (int i = 0; i < format.length(); i++) {
+            if (index >= timeArray.length) {
+                break;
+            }
+            for (; timeArray[index].isEmpty(); index++) ;
+            thisCase = format.substring(i, i + 1);
+            if (thisCase.matches("[yMdHhmsS]") && !thisCase.equals(lastCase)) {
+                switch (thisCase) {
+                    case "y":
+                        year = Integer.parseInt(timeArray[index]);
+                        break;
+                    case "M":
+                        month = Integer.parseInt(timeArray[index]);
+                        break;
+                    case "d":
+                        day = Integer.parseInt(timeArray[index]);
+                        break;
+                    case "H":
+                    case "h":
+                        hour = Integer.parseInt(timeArray[index]);
+                        break;
+                    case "m":
+                        minute = Integer.parseInt(timeArray[index]);
+                        break;
+                    case "s":
+                        second = Integer.parseInt(timeArray[index]);
+                        break;
+                    case "S":
+                        microSecond = Integer.parseInt(timeArray[index]);
+                        break;
+                }
+                index++;
+            }
+            lastCase = thisCase;
+        }
+        humanToStamp();
     }
 
     /**
@@ -305,12 +344,21 @@ public class Time implements ITime {
     @Override
     public String format(String format) {
         format = format.replaceAll("yyyy", Integer.toString(year));
-        format = format.replaceAll("MM", Integer.toString(month));
-        format = format.replaceAll("dd", Integer.toString(day));
+        format = format.replaceAll("y", Integer.toString(year));
+        format = format.replaceAll("MM", (month < 10) ? "0" + Integer.toString(month) : Integer.toString(month));
+        format = format.replaceAll("M", Integer.toString(month));
+        format = format.replaceAll("dd", (day < 10) ? "0" + Integer.toString(day) : Integer.toString(day));
+        format = format.replaceAll("d", Integer.toString(day));
         format = format.replaceAll("HH", (hour < 10) ? "0" + Integer.toString(hour) : Integer.toString(hour));
+        format = format.replaceAll("H", Integer.toString(hour));
         format = format.replaceAll("hh", (hour % 12 < 10) ? "0" + Integer.toString(hour % 12) : Integer.toString(hour % 12));
+        format = format.replaceAll("h", Integer.toString(hour % 12));
         format = format.replaceAll("mm", (minute < 10) ? "0" + Integer.toString(minute) : Integer.toString(minute));
+        format = format.replaceAll("m", Integer.toString(minute));
         format = format.replaceAll("ss", (second < 10) ? "0" + Integer.toString(second) : Integer.toString(second));
+        format = format.replaceAll("s", Integer.toString(second));
+        format = format.replaceAll("SS", (microSecond < 10) ? "0" + Integer.toString(microSecond) : Integer.toString(microSecond));
+        format = format.replaceAll("S", Integer.toString(microSecond));
         return format;
     }
 
