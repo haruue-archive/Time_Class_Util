@@ -240,7 +240,18 @@ public class Time implements ITime {
      */
     @Override
     public int getWeekOfYear() {
-        return 0;
+        int firstMonday;
+        for (firstMonday = 1; ; firstMonday++) {
+            if (month < 3) {
+                month += 12;
+                --year;
+            }
+            if ((firstMonday + 1 + 2 * month + 3 * (month + 1) / 5 + year + (year >> 2) - year / 100 + year / 400) % 7 == 1) {
+                break;
+            }
+        }
+        return (getDayOfYear() - firstMonday + 1) / 7 + 1;
+
     }
 
     /**
