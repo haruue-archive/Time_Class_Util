@@ -45,6 +45,15 @@ public class Time implements ITime {
     //stamp --> human
     private void stampToHuman() {
         //init timeHuman
+        year = 1970;
+        month = 1;
+        day = 1;
+        hour = 0;
+        minute = 0;
+        second = 0;
+        timeZone = 8;
+        microSecond = 0;
+        //add timezone
         long timeStamp = this.timeStamp + (long) (3600 * timeZone);
         //when time stamp is negative
         if (timeStamp < 0) {
@@ -106,6 +115,7 @@ public class Time implements ITime {
             negativeHumanToStamp();
             return;
         }
+        //init stamp
         long stamp = 0;
         //sum the seconds before the input year
         for (int year = 1970; year < this.year; year++) {
@@ -115,8 +125,8 @@ public class Time implements ITime {
         for (int month = 1; month < this.month; month++) {
             stamp += secondsOfMonth(this.year, month);
         }
-        //sum the seconds in the input month and before the input day
-        stamp += 86400 * (this.day - 1);
+        //sum the seconds in the input month and before the input day, day = 0 will be use in add() and minus()
+        stamp += (day != 0) ? (86400 * (this.day - 1)) : 0;
         //sum the seconds in the input day
         stamp += 3600 * (this.hour);
         stamp += 60 * (this.minute);
@@ -127,6 +137,7 @@ public class Time implements ITime {
 
     //human --> stamp, year < 1970
     private void negativeHumanToStamp() {
+        //init stamp
         long stamp = 0;
         for (int year = 1969; year > this.year; year--) {
             stamp += secondsOfYear(year);
@@ -162,6 +173,7 @@ public class Time implements ITime {
     @Override
     public void setYear(int year) {
         this.year = year;
+        humanToStamp();
     }
 
     @Override
@@ -172,6 +184,7 @@ public class Time implements ITime {
     @Override
     public void setMonth(int month) {
         this.month = month;
+        humanToStamp();
     }
 
     @Override
@@ -182,6 +195,7 @@ public class Time implements ITime {
     @Override
     public void setDay(int day) {
         this.day = day;
+        humanToStamp();
     }
 
     @Override
@@ -192,6 +206,7 @@ public class Time implements ITime {
     @Override
     public void setHour(int hour) {
         this.hour = hour;
+        humanToStamp();
     }
 
     @Override
@@ -202,6 +217,7 @@ public class Time implements ITime {
     @Override
     public void setMinute(int minute) {
         this.minute = minute;
+        humanToStamp();
     }
 
     @Override
@@ -212,6 +228,7 @@ public class Time implements ITime {
     @Override
     public void setSecond(int second) {
         this.second = second;
+        humanToStamp();
     }
 
     @Override
@@ -286,12 +303,20 @@ public class Time implements ITime {
      */
     @Override
     public void add(ITime data) {
-
+        this.timeStamp += data.getDay() * 86400 + data.getHour() * 3600 + data.getMinute() * 60 + data.getSecond();
+        stampToHuman();
     }
 
     @Override
     public void minus(ITime data) {
-
+        this.timeStamp -= data.getTimeStamp();
+        second = (int) (timeStamp % 60);
+        timeStamp -= second;
+        minute = (int) ((timeStamp % 3600) / 60);
+        timeStamp -= minute * 60;
+        hour = (int) ((timeStamp % 86400) / 3600);
+        timeStamp -= hour * 3600;
+        day = (int) (timeStamp / 86400);
     }
 
     /**
