@@ -11,6 +11,39 @@ public class Time implements ITime {
     private int year = 1970, month = 1, day = 1, hour = 0, minute = 0, second = 0, timeZone = 8, microSecond = 0;
     private long timeStamp;
 
+    //define Constructors
+    public Time(long timeStamp) {
+        set(timeStamp);
+    }
+
+    public Time(long timeStamp, int timeZone) {
+        this.timeZone = timeZone;
+        set(timeStamp);
+    }
+
+    public Time(long timeStamp, String timeZone) {
+        setTimeZone(timeZone);
+        set(timeStamp);
+    }
+
+    public Time(int year, int month, int day, int hour, int minute, int second) {
+        set(year, month, day, hour, minute, second);
+    }
+
+    public Time(int year, int month, int day, int hour, int minute, int second, int timeZone) {
+        this.timeZone = timeZone;
+        set(year, month, day, hour, minute, second);
+    }
+
+    public Time(int year, int month, int day, int hour, int minute, int second, String timeZone) {
+        setTimeZone(timeZone);
+        set(year, month, day, hour, minute, second);
+    }
+
+    public Time(String time, String format) {
+        parse(time, format);
+    }
+
     //necessary math function
     private static boolean isLeapYear(int year) {
         return ((((year % 100) == 0) && (year % 400 == 0)) || (((year % 100) != 0) && ((year % 4) == 0)));
@@ -310,6 +343,7 @@ public class Time implements ITime {
     @Override
     public void minus(ITime data) {
         this.timeStamp -= data.getTimeStamp();
+        long timeStamp = this.timeStamp;
         second = (int) (timeStamp % 60);
         timeStamp -= second;
         minute = (int) ((timeStamp % 3600) / 60);
