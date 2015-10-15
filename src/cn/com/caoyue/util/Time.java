@@ -2,9 +2,11 @@
 // * REDROCK-TEAM HOMEWORK 2 (20151011)          *
 // * Level 4 - Make a Class for Time Convert     *
 // * Author:  Haruue Icymoon                     *
+// * Time:    Thu Oct 15 21:23:57 CST 2015       *
 // * Website: http://www.caoyue.com.cn/          *
 // * * * * * * * * * * * * * * * * * * * * * * * *
 
+package cn.com.caoyue.util;
 import com.ant.jobgod.jobgod.util.ITime;
 
 public class Time implements ITime {
@@ -42,6 +44,14 @@ public class Time implements ITime {
 
     public Time(String time, String format) {
         parse(time, format);
+    }
+
+    public Time(int day, int hour, int minute, int second) {
+        this.day = day;
+        this.hour = hour;
+        this.minute = minute;
+        this.second = second;
+        humanToStamp();
     }
 
     //necessary math function
