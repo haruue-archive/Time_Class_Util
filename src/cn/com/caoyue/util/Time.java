@@ -14,6 +14,15 @@ public class Time implements ITime {
     private long timeStamp;
 
     //define Constructors
+    public Time() {
+
+    }
+
+    public Time(Time origTime) {
+        timeStamp = origTime.getTimeStamp();
+        stampToHuman();
+    }
+
     public Time(long timeStamp) {
         set(timeStamp);
     }
@@ -194,6 +203,15 @@ public class Time implements ITime {
         stamp += (60 - second);
         stamp += (long) (this.timeZone * 3600);
         timeStamp = -stamp;
+    }
+
+    public boolean equals(Time subTime) {
+        return timeStamp == subTime.getTimeStamp();
+    }
+
+    @Override
+    public String toString() {
+        return format("yyyy-MM-dd HH:mm:ss");
     }
 
     @Override
