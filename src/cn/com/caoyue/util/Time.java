@@ -328,6 +328,22 @@ public class Time implements ITime {
                 break;
             }
         }
+        if (getDayOfYear() < firstMonday) {
+            int firstMondayOfLastYear;
+            int year = this.year - 1;
+            for (firstMondayOfLastYear = 1; ; firstMondayOfLastYear++) {
+                if (month < 3) {
+                    month += 12;
+                    --year;
+                }
+                if ((firstMondayOfLastYear + 1 + 2 * month + 3 * (month + 1) / 5 + year + (year >> 2) - year / 100 + year / 400) % 7 == 1) {
+                    break;
+                }
+                return (daysOfYear(year) - firstMondayOfLastYear + firstMonday + 1) / 7 + 1;
+            }
+
+
+        }
         return (getDayOfYear() - firstMonday + 1) / 7 + 1;
 
     }
