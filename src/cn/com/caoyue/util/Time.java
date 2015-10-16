@@ -333,7 +333,7 @@ public class Time implements ITime {
                 if (tmpTime.getWeek() == 1)
                     break;
             }
-            return (daysOfYear(year) - firstMondayOfLastYear + firstMonday + 1) / 7 + 1;
+            return (daysOfYear(year) - firstMondayOfLastYear + getDayOfYear()) / 7 + 1;
         }
         return (getDayOfYear() - firstMonday + 1) / 7 + 1;
 
@@ -348,7 +348,7 @@ public class Time implements ITime {
     public int getDayOfYear() {
         int result = 0;
         for (int month = 1; month < this.month; month++) {
-            result += daysOfMonth(this.year, this.month);
+            result += daysOfMonth(this.year, month);
         }
         result += this.day;
         return result;
