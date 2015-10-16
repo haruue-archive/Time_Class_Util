@@ -304,6 +304,7 @@ public class Time implements ITime {
      */
     @Override
     public int getWeek() {
+        int year = this.year;
         if (month < 3) {
             month += 12;
             --year;
@@ -318,31 +319,21 @@ public class Time implements ITime {
      */
     @Override
     public int getWeekOfYear() {
-        int firstMonday;
+        int firstMonday, year = this.year;
         for (firstMonday = 1; ; firstMonday++) {
-            if (month < 3) {
-                month += 12;
-                --year;
-            }
-            if ((firstMonday + 1 + 2 * month + 3 * (month + 1) / 5 + year + (year >> 2) - year / 100 + year / 400) % 7 == 1) {
+            Time tmpTime = new Time(year, 1, firstMonday, 0, 0, 0);
+            if (tmpTime.getWeek() == 1)
                 break;
-            }
         }
         if (getDayOfYear() < firstMonday) {
             int firstMondayOfLastYear;
-            int year = this.year - 1;
+            year--;
             for (firstMondayOfLastYear = 1; ; firstMondayOfLastYear++) {
-                if (month < 3) {
-                    month += 12;
-                    --year;
-                }
-                if ((firstMondayOfLastYear + 1 + 2 * month + 3 * (month + 1) / 5 + year + (year >> 2) - year / 100 + year / 400) % 7 == 1) {
+                Time tmpTime = new Time(year, 1, firstMondayOfLastYear, 0, 0, 0);
+                if (tmpTime.getWeek() == 1)
                     break;
-                }
-                return (daysOfYear(year) - firstMondayOfLastYear + firstMonday + 1) / 7 + 1;
             }
-
-
+            return (daysOfYear(year) - firstMondayOfLastYear + firstMonday + 1) / 7 + 1;
         }
         return (getDayOfYear() - firstMonday + 1) / 7 + 1;
 
