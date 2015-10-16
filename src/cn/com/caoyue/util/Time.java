@@ -338,7 +338,6 @@ public class Time implements ITime {
             return (daysOfYear(year) - firstMondayOfLastYear + getDayOfYear()) / 7 + 1;
         }
         return (getDayOfYear() - firstMonday + 1) / 7 + 1;
-
     }
 
     /**
@@ -489,5 +488,14 @@ public class Time implements ITime {
                 break;
         }
         stampToHuman();
+    }
+
+    public void setTimeZone(int timeZone) {
+        this.timeZone = timeZone;
+        stampToHuman();
+    }
+
+    public int getTimeZone() {
+        return timeZone;
     }
 }
