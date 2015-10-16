@@ -103,8 +103,6 @@ public class Time implements ITime {
         hour = 0;
         minute = 0;
         second = 0;
-        timeZone = 8;
-        microSecond = 0;
         //add timezone
         long timeStamp = this.timeStamp + (long) (3600 * timeZone);
         //when time stamp is negative
@@ -305,6 +303,7 @@ public class Time implements ITime {
     @Override
     public int getWeek() {
         int year = this.year;
+        int month = this.month;
         if (month < 3) {
             month += 12;
             --year;
@@ -326,6 +325,9 @@ public class Time implements ITime {
                 break;
         }
         if (getDayOfYear() < firstMonday) {
+            if (getWeek() == 0) {
+                return 1;
+            }
             int firstMondayOfLastYear;
             year--;
             for (firstMondayOfLastYear = 1; ; firstMondayOfLastYear++) {
