@@ -296,7 +296,7 @@ public class Time implements ITime {
     }
 
     /**
-     * È¡ĞÇÆÚ¼¸
+     * å–æ˜ŸæœŸå‡ 
      *
      * @return
      */
@@ -312,7 +312,7 @@ public class Time implements ITime {
     }
 
     /**
-     * È¡µ±ÖÜÊÇµ±ÄêµÚ¼¸ÖÜ
+     * å–å½“å‘¨æ˜¯å½“å¹´ç¬¬å‡ å‘¨
      *
      * @return
      */
@@ -341,7 +341,7 @@ public class Time implements ITime {
     }
 
     /**
-     * È¡µ±ÌìÊÇµ±ÄêµÚ¼¸Ìì
+     * å–å½“å¤©æ˜¯å½“å¹´ç¬¬å‡ å¤©
      *
      * @return
      */
@@ -356,7 +356,7 @@ public class Time implements ITime {
     }
 
     /**
-     * È¡Ê±¼ä´Á
+     * å–æ—¶é—´æˆ³
      *
      * @return
      */
@@ -366,7 +366,7 @@ public class Time implements ITime {
     }
 
     /**
-     * Ê±¼ä¼Ó¼õ
+     * æ—¶é—´åŠ å‡
      *
      * @param data
      */
@@ -390,11 +390,11 @@ public class Time implements ITime {
     }
 
     /**
-     * Ê±¼ä¸ñÊ½»¯½âÎö¡£
-     * Àı£ºÊäÈëyyyyÄêMMÔÂddÈÕ hh:mm:ss  Óë 2015Äê10ÔÂ14ÈÕ 08:00:00 À´ÉèÖÃÊ±¼ä
+     * æ—¶é—´æ ¼å¼åŒ–è§£æã€‚
+     * ä¾‹ï¼šè¾“å…¥yyyyå¹´MMæœˆddæ—¥ hh:mm:ss  ä¸ 2015å¹´10æœˆ14æ—¥ 08:00:00 æ¥è®¾ç½®æ—¶é—´
      *
-     * @param time   Ê±¼äÎÄ±¾
-     * @param format Äê:y		ÔÂ:M		ÈÕ:d		Ê±:h(12ÖÆ)/H(24Öµ)	·Ö:m		Ãë:s		ºÁÃë:S
+     * @param time   æ—¶é—´æ–‡æœ¬
+     * @param format å¹´:y		æœˆ:M		æ—¥:d		æ—¶:h(12åˆ¶)/H(24å€¼)	åˆ†:m		ç§’:s		æ¯«ç§’:S
      */
     @Override
     public void parse(String time, String format) {
@@ -441,11 +441,11 @@ public class Time implements ITime {
     }
 
     /**
-     * Ê±¼ä¸ñÊ½»¯¡£
-     * Àı£ºÊäÈëyyyyÄêMMÔÂddÈÕ hh:mm:ss  Ôò·µ»Ø2015Äê10ÔÂ14ÈÕ 08:00:00
+     * æ—¶é—´æ ¼å¼åŒ–ã€‚
+     * ä¾‹ï¼šè¾“å…¥yyyyå¹´MMæœˆddæ—¥ hh:mm:ss  åˆ™è¿”å›2015å¹´10æœˆ14æ—¥ 08:00:00
      *
-     * @param format ¸ñÊ½ Äê:y		ÔÂ:M		ÈÕ:d		Ê±:h(12ÖÆ)/H(24Öµ)	·Ö:m		Ãë:s		ºÁÃë:S
-     * @return ¸ñÊ½»¯Ê±¼äÎÄ±¾
+     * @param format æ ¼å¼ å¹´:y		æœˆ:M		æ—¥:d		æ—¶:h(12åˆ¶)/H(24å€¼)	åˆ†:m		ç§’:s		æ¯«ç§’:S
+     * @return æ ¼å¼åŒ–æ—¶é—´æ–‡æœ¬
      */
     @Override
     public String format(String format) {
@@ -469,9 +469,9 @@ public class Time implements ITime {
     }
 
     /**
-     * Ê±ÇøÇĞ»»
+     * æ—¶åŒºåˆ‡æ¢
      *
-     * @param timeZone Ê±ÇøÃû×Ö¡£eg:GMT,UTC  ,CCT ,JSTµÈ¡£¶ÔÊ±¼ä½øĞĞ×ª»»¡£Ä¬ÈÏCCT¡£
+     * @param timeZone æ—¶åŒºåå­—ã€‚eg:GMT,UTC  ,CCT ,JSTç­‰ã€‚å¯¹æ—¶é—´è¿›è¡Œè½¬æ¢ã€‚é»˜è®¤CCTã€‚
      */
     @Override
     public void setTimeZone(String timeZone) {
