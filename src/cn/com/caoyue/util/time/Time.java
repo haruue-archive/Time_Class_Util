@@ -1,10 +1,20 @@
-// * * * * * * * * * * * * * * * * * * * * * * * *
-// * REDROCK-TEAM HOMEWORK 2 (20151011)          *
-// * Level 4 - Make a Class for Time Convert     *
-// * Author:  Haruue Icymoon                     *
-// * Time:    Thu Oct 15 21:23:57 CST 2015       *
-// * Website: http://www.caoyue.com.cn/          *
-// * * * * * * * * * * * * * * * * * * * * * * * *
+/*    Apache License 2.0
+ *
+ *    Copyright [2016] [Haruue Icymoon]
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ *
+ */
 
 package cn.com.caoyue.util.time;
 
@@ -17,6 +27,8 @@ package cn.com.caoyue.util.time;
  *
  * @author Haruue Icymoon haruue@caoyue.com.cn
  * @version 1.2
+ * @see <a href="https://github.com/haruue/Time_Class_Util">GitHub</a>
+ *
  */
 public class Time {
     private int year = 1970, month = 1, day = 1, hour = 0, minute = 0, second = 0, timeZone = 8, microSecond = 0;

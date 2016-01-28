@@ -1,10 +1,20 @@
-package cn.com.caoyue.util.time.demojava;// * * * * * * * * * * * * * * * * * * * * * * * *
-// * REDROCK-TEAM HOMEWORK 2 (20151011)          *
-// * Level 4 - Make a Class for Time Convert     *
-// * Author:  Haruue Icymoon                     *
-// * Time:    Thu Oct 15 21:23:57 CST 2015       *
-// * Website: http://www.caoyue.com.cn/          *
-// * * * * * * * * * * * * * * * * * * * * * * * *
+/*
+            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+                    Version 2, December 2004
+
+ Copyright (C) 2016 Haruue Icymoon <haruue@caoyue.com.cn>
+
+ Everyone is permitted to copy and distribute verbatim or modified
+ copies of this license document, and changing it is allowed as long
+ as the name is changed.
+
+            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+
+  0. You just DO WHAT THE FUCK YOU WANT TO.
+ */
+
+package cn.com.caoyue.util.time.demojava;
 
 import cn.com.caoyue.util.time.Time;
 

@@ -24,6 +24,9 @@ Time Class Util
 Haruue Icymoon <haruue@caoyue.com.cn> <br />
 本项目作为 红岩网校 - 移动开发部 的第 2 次作业 的 Level 4 部分。
 
+##License
+Apache License 2.0
+
 <!--
 // * * * * * * * * * * * * * * * * * * * * * * * *
 // * REDROCK-TEAM HOMEWORK 2 (20151011)          *
