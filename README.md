@@ -13,7 +13,6 @@ Time Class Util
     + 对于 `parse(String time, String format)` 函数，参数与参数之间必须有非数字字符间隔，类似于 `"20151015230000"` 是无法用 `"yyyyMMddHHmmss"` 进行解析的;
     + 对于 `format(String format)` 函数， `y` 和 `yyyy` 是等价的; 
     + 对于 `format(String format)` 函数， `MM` 与 `M`，`dd` 与 `d`， `HH` 与 `H`，`mm` 与 `m`，`ss` 与 `s`这种有一个字母和两个字母区分的形式，两个字母表示如果这一位不满两位数则补 0 ，一个字母则这种情况不补 0 ;
-    + 对于 `format(String format)` 函数， `hh` 所表示的 12 小时制，范围是 0 到 11 ，而不是 1 到 12 。
     
 
 
