@@ -6,7 +6,7 @@
 // * Website: http://www.caoyue.com.cn/          *
 // * * * * * * * * * * * * * * * * * * * * * * * *
 
-package cn.com.caoyue.util;
+package cn.com.caoyue.util.time;
 
 /**
  * 时间处理工具 <br>
@@ -289,6 +289,17 @@ public class Time {
     }
 
     /**
+     * 转换为字符串<br>
+     * 相当于 format(String format)
+     *
+     * @param format 格式字符串，参考 format(String format)
+     * @return 格式化好的字符串
+     */
+    public String toString(String format) {
+        return format(format);
+    }
+
+    /**
      * 以给定时间戳设置时间
      * @param timeStamp 时间戳
      */
@@ -564,11 +575,11 @@ public class Time {
     /**
      * 给 int 属性加一个数值
      *
-     * @param field 属性，必须是 cn.com.caoyue.util.Time.Field 中的 int 值
+     * @param field 属性，必须是 cn.com.caoyue.util.time.Time.Field 中的 int 值
      * @param value 增加的数值
      * @return 结果 this + value
      * @throws IllegalArgumentException 找不到属性
-     * @see cn.com.caoyue.util.Time.Field
+     * @see Time.Field
      */
     public Time add(int field, int value) {
         Time time = new Time(this.timeStamp, this.timeZone);
@@ -579,11 +590,11 @@ public class Time {
     /**
      * 给 long 属性加一个数值
      *
-     * @param field 属性，必须是 cn.com.caoyue.util.Time.Field 中的 long 值
+     * @param field 属性，必须是 cn.com.caoyue.util.time.Time.Field 中的 long 值
      * @param value 增加的数值
      * @return 结果 this + value
      * @throws IllegalArgumentException 找不到属性
-     * @see cn.com.caoyue.util.Time.Field
+     * @see Time.Field
      */
     public Time add(long field, long value) {
         Time time = new Time(this.timeStamp, this.timeZone);
@@ -594,11 +605,11 @@ public class Time {
     /**
      * 给 int 属性减一个数值
      *
-     * @param field 属性，必须是 cn.com.caoyue.util.Time.Field 中的 int 值
+     * @param field 属性，必须是 cn.com.caoyue.util.time.Time.Field 中的 int 值
      * @param value 减少的数值
      * @return 结果 this - value
      * @throws IllegalArgumentException 找不到属性
-     * @see cn.com.caoyue.util.Time.Field
+     * @see Time.Field
      */
     public Time minus(int field, int value) {
         return add(field, -value);
@@ -607,11 +618,11 @@ public class Time {
     /**
      * 给 long 属性减一个数值
      *
-     * @param field 属性，必须是 cn.com.caoyue.util.Time.Field 中的 long 值
+     * @param field 属性，必须是 cn.com.caoyue.util.time.Time.Field 中的 long 值
      * @param value 减少的数值
      * @return 结果 this - value
      * @throws IllegalArgumentException 找不到属性
-     * @see cn.com.caoyue.util.Time.Field
+     * @see Time.Field
      */
     public Time minus(long field, long value) {
         return add(field, -value);
@@ -715,7 +726,7 @@ public class Time {
      *
      * @param timeZone 时区名字。eg:GMT,UTC  ,CCT ,JST等。对时间进行转换。默认CCT。<br>
      * @deprecated 请使用 setTimeZone(int) 与 TimeZone 子类代替。
-     * @see cn.com.caoyue.util.Time.TimeZone
+     * @see Time.TimeZone
      */
     public void setTimeZone(String timeZone) {
         switch (timeZone) {
@@ -765,10 +776,10 @@ public class Time {
     /**
      * 获取 int 属性的值
      *
-     * @param field 属性，必须是 cn.com.caoyue.util.Time.Field 中的 int 值
+     * @param field 属性，必须是 cn.com.caoyue.util.time.Time.Field 中的 int 值
      * @return 该属性的值
      * @throws IllegalArgumentException 找不到属性
-     * @see cn.com.caoyue.util.Time.Field
+     * @see Time.Field
      */
     public int get(int field) {
         switch (field) {
@@ -794,10 +805,10 @@ public class Time {
     /**
      * 获取 long 属性的值
      *
-     * @param field 属性，必须是 cn.com.caoyue.util.Time.Field 中的 long 值
+     * @param field 属性，必须是 cn.com.caoyue.util.time.Time.Field 中的 long 值
      * @return 该属性的值
      * @throws IllegalArgumentException 找不到该属性
-     * @see cn.com.caoyue.util.Time.Field
+     * @see Time.Field
      */
     public long get(long field) {
         if (field == Field.timeStamp) {
@@ -810,10 +821,10 @@ public class Time {
     /**
      * 设置 int 属性的值
      *
-     * @param field 属性，必须是 cn.com.caoyue.util.Time.Field 中的 int 值
+     * @param field 属性，必须是 cn.com.caoyue.util.time.Time.Field 中的 int 值
      * @param value 该属性的值
      * @throws IllegalArgumentException 找不到该属性
-     * @see cn.com.caoyue.util.Time.Field
+     * @see Time.Field
      */
     public void set(int field, int value) {
         switch (field) {
@@ -846,10 +857,10 @@ public class Time {
     /**
      * 设置 long 属性的值
      *
-     * @param field 属性，必须是 cn.com.caoyue.util.Time.Field 中的 long 值
+     * @param field 属性，必须是 cn.com.caoyue.util.time.Time.Field 中的 long 值
      * @param value 该属性的值
      * @throws IllegalArgumentException 找不到该属性
-     * @see cn.com.caoyue.util.Time.Field
+     * @see Time.Field
      */
     public void set(long field, long value) {
         if (field == Field.timeStamp) {
