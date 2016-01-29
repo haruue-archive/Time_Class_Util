@@ -5,11 +5,14 @@ Time Class Util for Android
 用 Java 写的一个 Time 类，支持时间戳转换、星期换算、格式化时间解析和输出、时区和并不完善的时间加减功能。<br />
 功能上主要是实现朱大 [@Jude95](https://github.com/Jude95) 提供的 ITime 接口。
 
-##Usage
+##Dependencie
 在依赖里添加
 ``` shell
 compile 'cn.com.caoyue.util:time:1.2.1'
 ```
+
+##Javadoc
+http://haruue.github.io/Time_Class_Util
 
 ##Something Important
 
